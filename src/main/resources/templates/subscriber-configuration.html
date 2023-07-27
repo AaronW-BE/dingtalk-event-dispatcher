@@ -1,0 +1,94 @@
+<!--thymeleaf namespace define -->
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>配置订阅</title>
+
+    <style>
+        .sub-table {
+            width: 100%;
+            border: 1px solid #cccccc;
+        }
+        .sub-item {
+            border: 1px solid #ccc;
+        }
+
+        .sub-item span {
+        }
+
+        .sub-item:nth-child(odd) {
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <h4>订阅配置</h4>
+    <div>
+        <div>Subscribers: <span th:text="${subscribers.size()}"></span></div>
+        <div class="sub-list">
+            <table class="sub-table">
+                <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>事件</th>
+                        <th>地址</th>
+                        <th>备注</th>
+                        <th>创建时间</th>
+                        <th>更新时间</th>
+                        <th style="width: 200px;">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="sub : ${subscribers}" class="sub-item">
+                        <td th:text="${sub.name}"></td>
+                        <td th:text="${sub.event}"></td>
+                        <td th:text="${sub.url}"></td>
+                        <td th:text="${sub.comments}"></td>
+                        <td th:text="${sub.getCreatedData()}"></td>
+                        <td th:text="${sub.updatedData}"></td>
+                        <td>
+<!--                            <a th:href="'./test?sn=' + ${sub.getSn()}">测试</a>-->
+<!--                            <a th:href="'./logs?sn=' + ${sub.getSn()}">日志</a>-->
+                            <a th:href="'./del?sn=' + ${sub.getSn()}">删除</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr />
+        <div class="create-sub">
+            <form method="post" action="./create">
+                <div>
+                    <div>Subscriber Name:</div>
+                    <label>
+                        <input type="text" name="subName" />
+                    </label>
+                </div>
+                <div>
+                    <div>Event Type:</div>
+                    <label>
+                        <input type="text" name="eventType" />
+                    </label>
+                </div>
+                <div>
+                    <div>Webhook:</div>
+                    <label>
+                        <input type="text" name="webhook" />
+                    </label>
+                </div>
+                <div>
+                    <div>Token:</div>
+                    <label>
+                        <input type="text" name="token" />
+                    </label>
+                </div>
+                <div>
+                    <button>Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

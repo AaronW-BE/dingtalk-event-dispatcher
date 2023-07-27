@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vip.fastgo.event.dispatcher.mapper.SubscriberEntityMapper">
+
+    <resultMap id="subscribersMap" type="vip.fastgo.event.dispatcher.entity.SubscriberEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="sn" property="sn" jdbcType="VARCHAR"/>
+
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="event" property="event" jdbcType="VARCHAR"/>
+        <result column="token" property="token" jdbcType="VARCHAR"/>
+        <result column="created_date" property="createdData" jdbcType="TIMESTAMP" />
+        <result column="updated_date" property="updatedData" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <insert id="insert" parameterType="vip.fastgo.event.dispatcher.entity.SubscriberEntity">
+        insert into subscribers (id, sn, name, url, event, token, created_date, updated_date)
+        values (#{id}, #{sn}, #{name}, #{url}, #{event}, #{token}, now(), now())
+    </insert>
+    <update id="updateByPrimaryKey">
+
+    </update>
+    <update id="updateByPrimaryKeySelective">
+
+    </update>
+    <delete id="deleteByPrimaryKey">
+        delete from subscribers where id = #{id}
+    </delete>
+    <delete id="deleteBySn">
+        delete from subscribers where sn = #{sn} limit 1
+    </delete>
+    <select id="selectByPrimaryKey" resultMap="subscribersMap">
+        select * from subscribers where id = #{id}
+    </select>
+    <select id="findAll" resultMap="subscribersMap">
+        select * from subscribers
+    </select>
+
+</mapper>

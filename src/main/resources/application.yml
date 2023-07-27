@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    active: dev
+
+mybatis:
+    mapper-locations: classpath*:/mapper/*.xml
+    type-aliases-package: vip.fastgo.dingtalk.dispatcher.entity
+    configuration:
+        auto-mapping-behavior: partial
+        map-underscore-to-camel-case: true
